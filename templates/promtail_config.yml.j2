@@ -1,0 +1,53 @@
+server:
+  http_listen_port: {{ promtail_http_listen_port }}
+  grpc_listen_port: {{ promtail_grpc_listen_port }}
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+{% if promtail_use_tls %}
+  - url: 'https://{{ loki_host }}:{{ loki_http_listen_port }}/loki/api/v1/push'
+{% else %}
+  - url: 'http://{{ loki_host }}:{{ loki_http_listen_port }}/loki/api/v1/push'
+{% endif %}
+
+scrape_configs:
+{% if promtail_job_journal %}
+  - job_name: journal
+    journal:
+      max_age: 12h
+      labels:
+        job: systemd
+        host: {{ inventory_hostname }}
+    relabel_configs:
+      - source_labels: ['__journal__systemd_unit']
+        target_label: 'unit'
+{% endif %}
+{% if promtail_job_nginx %}
+  - job_name: nginx
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          host: {{ inventory_hostname }}
+          __path__: /var/log/nginx/*log
+    pipeline_stages:
+    - match:
+        selector: '{job="nginx"}'
+        stages:
+        - regex:
+            expression: '^(?P<remote_addr>[\w\.]+) - (?P<remote_user>[^ ]*) \[(?P<time_local>.*)\] "(?P<method>[^ ]*) (?P<request>[^ ]*) (?P<protocol>[^ ]*)" (?P<status>[\d]+) (?P<body_bytes_sent>[\d]+) "(?P<http_referer>[^"]*)" "(?P<http_user_agent>[^"]*)"?'
+        - labels:
+            #remote_addr:
+            #remote_user:
+            #time_local:
+            method:
+            #request:
+            #protocol:
+            status:
+            #body_bytes_sent:
+            #http_referer:
+            #http_user_agent:
+{% endif %}

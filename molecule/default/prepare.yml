@@ -1,0 +1,9 @@
+---
+
+- name: converge
+  hosts: all
+  become: true
+  tasks:
+    - name: install loki
+      include_role:
+        name: tibroc.monitoring_loki

@@ -1,0 +1,12 @@
+---
+
+- name: converge
+  hosts: all
+  become: true
+  vars:
+    - promtail_job_journal: true
+    - promtail_job_nginx: true
+  tasks:
+    - name: include promtail
+      include_role:
+        name: monitoring_promtail

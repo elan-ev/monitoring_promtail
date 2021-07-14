@@ -1,0 +1,4 @@
+---
+
+roles:
+  - tibroc.monitoring_loki
