@@ -26,7 +26,7 @@ Your playbook might look like this:
 - hosts: all
   become: true
   roles:
-    - tibroc.monitoring_promtail
+    - elan.monitoring_promtail
 ```
 
 ## Development
@@ -56,4 +56,4 @@ The [prepare.yml](molecule/default/prepare.yml)-file will also install loki in t
 
 ## Author Information
 
-Timo Nogueira Brockmeyer
+[ELAN e.V](https://elan-ev.de/)
