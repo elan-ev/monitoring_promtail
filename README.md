@@ -1,6 +1,6 @@
 # Ansible Role for Loki and Promtail
 
-![molecule](https://github.com/tibroc/monitoring_promtail/actions/workflows/molecule.yml/badge.svg)
+![molecule](https://github.com/elan/monitoring_promtail/actions/workflows/molecule.yml/badge.svg)
 
 Install the latest [promtail](https://grafana.com/docs/loki/latest/clients/promtail/) version with [ansible](https://docs.ansible.com/).
 

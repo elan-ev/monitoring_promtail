@@ -1,4 +1,4 @@
 ---
 
 roles:
-  - tibroc.monitoring_loki
+  - elan.monitoring_loki
