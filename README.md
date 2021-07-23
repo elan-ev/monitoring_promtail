@@ -23,16 +23,23 @@ You can also add the user to arbitrary other groups by specifying `additional_gr
 Your playbook might look like this:
 
 ```yaml
+---
+
 - hosts: all
   become: true
   roles:
     - elan.monitoring_promtail
+  vars:
+    - promtail_config_template: 'my_templates/promtail_config.yml.j2'
+
 ```
+
+In this case you would have a configuration template for promtail that is located in a folder `my_templates` relative to the playbook.
 
 ## Development
 
 For development and testing you can use [molecule](https://molecule.readthedocs.io/en/latest/).
-With podman as driver you can install it like this – preferably in a virtual environment (if you use docker, substitute `podman` with `docker`):
+With podman as driver you can install it like this – preferably in a virtual environment:
 
 ```bash
 pip install -r .dev_requirements.txt
