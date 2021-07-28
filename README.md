@@ -28,10 +28,9 @@ Your playbook might look like this:
 - hosts: all
   become: true
   roles:
-    - elan.monitoring_promtail
-  vars:
-    - promtail_config_template: 'my_templates/promtail_config.yml.j2'
-
+    - role: elan.monitoring_promtail
+      promtail_config_template: 'my_templates/promtail_config.yml.j2'
+      promtail_use_tls: true
 ```
 
 In this case you would have a configuration template for promtail that is located in a folder `my_templates` relative to the playbook.
@@ -55,7 +54,7 @@ molecule destroy
 
 If you want to inspect a running test instance use `molecule login --host <instance_name>`, where you replace `<instance_name>` with the desired value.
 
-The [prepare.yml](molecule/default/prepare.yml)-file will also install loki in the same container, so that promtail can be tested against a local installation of loki. 
+The [prepare.yml](molecule/default/prepare.yml)-file will also install loki in the same container, so that promtail can be tested against a local installation of loki.
 
 ## License
 
