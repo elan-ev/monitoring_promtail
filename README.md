@@ -35,6 +35,23 @@ Your playbook might look like this:
 
 In this case you would have a configuration template for promtail that is located in a folder `my_templates` relative to the playbook.
 
+Or, if you want to use the pre-installed template, it could look something like this:
+
+```yaml
+---
+
+- hosts: all
+  become: true
+  roles:
+    - role: elan.monitoring_promtail
+      loki_host: your-loki.your-domain.com
+      use_basic_auth: true
+      basic_auth_user: loki
+      basic_auth_password: 1234
+      promtail_job_journal: true
+      promtail_job_nginx: true
+```
+
 ## Development
 
 For development and testing you can use [molecule](https://molecule.readthedocs.io/en/latest/).
