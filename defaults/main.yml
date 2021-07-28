@@ -20,3 +20,10 @@ make_varlog_accessible: true
 # add the promtail user to more user groups, to be
 # able to read their logs
 # additional_groups: [group1, group2]
+
+# configure basic auth
+# only if 'use_basic_auth' is true, the other
+# variables will be considered
+use_basic_auth: false
+basic_auth_user: ''
+basic_auth_password: ''

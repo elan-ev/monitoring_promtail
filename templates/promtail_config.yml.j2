@@ -11,6 +11,11 @@ clients:
 {% else %}
   - url: 'http://{{ loki_host }}:{{ loki_http_listen_port }}/loki/api/v1/push'
 {% endif %}
+{% if use_basic_auth %}
+    basic_auth:
+      username: '{{ basic_auth_user }}'
+      password: '{{ basic_auth_password }}'
+{% endif %}
 
 scrape_configs:
 {% if promtail_job_journal %}
