@@ -80,7 +80,7 @@
         promtail_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ _checksums }}"
       when: "'promtail-linux-amd64.zip' in item"
-  when: promtail_remote_version["failed"] or promtail_remote_version["content"] | b64decode != json_reponse.json.tag_name  # noqa 204
+  when: promtail_remote_version["failed"] or promtail_remote_version["content"] | b64decode != json_reponse.json.tag_name  # yamllint disable-line rule:line-length
 
 - name: download and install promtail
   block:
@@ -122,7 +122,7 @@
         owner: promtail
         group: promtail
         mode: '0644'
-  when: promtail_remote_version["failed"] or promtail_remote_version["content"] | b64decode != json_reponse.json.tag_name  # noqa 204
+  when: promtail_remote_version["failed"] or promtail_remote_version["content"] | b64decode != json_reponse.json.tag_name  # yamllint disable-line rule:line-length
   notify: restart promtail
 
 - name: copy service file

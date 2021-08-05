@@ -2,7 +2,7 @@
 
 name: molecule
 
-on:  # noqa yaml
+on:  # yamllint disable-line rule:truthy
   - push
   - pull_request
 
