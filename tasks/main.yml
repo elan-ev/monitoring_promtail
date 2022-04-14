@@ -9,6 +9,7 @@
   user:
     name: promtail
     state: present
+    create_home: false
 
 - name: create promtail directory
   file:
